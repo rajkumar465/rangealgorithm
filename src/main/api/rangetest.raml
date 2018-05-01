@@ -1,0 +1,38 @@
+#%RAML 1.0
+baseUri: https://rangestest.cloudhub.io
+title: rangetest
+version: "1.0"
+securitySchemes: 
+  basicAuth:
+    description: This API is secured by Basic Authentication
+    type: Basic Authentication
+    
+securedBy: basicAuth
+/rangetest:
+  get:
+    description: get multiple of 3 and 7 between a range
+    displayName: get
+    queryParameters: 
+      minValue:
+        displayName: minValue
+        description: minValue of Input
+        type: integer
+        example: 10
+      maxValue:
+        displayName: maxValue
+        description: maxValue of Input
+        type: integer
+        example: 134
+    responses: 
+      200:
+        body:
+          applicatio/json:
+            example: !include examples/results.example
+      500:
+          body:
+            application/json:
+              example: !include examples/errorResponse.example
+      404:
+        body: 
+          application/json:
+            example: !include examples/errorResponse.example  
